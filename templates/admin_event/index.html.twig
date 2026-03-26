@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration des événements{% endblock %}
+{% block stylesheets %}
+<style>
+    :root {
+        --main-color: #650031;
+        --soft-pink: #fbe7ee;
+    }
+    .title {
+        color: var(--main-color);
+        font-weight: bold;
+        margin: 12px ;
+    }
+    .btnmain {
+        background-color: var(--main-color);
+        border: none;
+        color: white;
+        transition: 0.3s;
+        border-radius: 12px;
+    }
+    .btnmain:hover {
+        background-color: #d6a3bc;
+        color:var(--main-color);
+        font-weight: bold;
+    }
+    .pinky {
+        background-color: var(--soft-pink)!important;
+        color: var(--main-color);
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+{% block body %}
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="title">Gestion des événements</h2>
+            <a href="{{ path('admin_event_new') }}" class="btn btn-dark btnmain">
+                + Nouvel événement
+            </a>
+        </div>
+
+        {% if events is empty %}
+            <div class="alert alert-info">Aucun événement trouvé.</div>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle shadow-sm rounded overflow-hidden">
+    <thead class="pinky text-center">
+        <tr>
+            <th>#</th>
+            <th>Titre</th>
+            <th>Date</th>
+            <th>Lieu</th>
+            <th>Places</th>
+            <th>Image</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+       {% for event in events %}
+    <tr class="clickable-row"
+        onclick="window.location='{{ path('admin_event_reservations', {'id': event.id}) }}'"
+        style="cursor: pointer;">
+        <td class="fw-bold">{{ event.id }}</td>
+
+        <td>
+            <span class="fw-semibold">{{ event.title }}</span>
+        </td>
+
+        <td>
+            {% if event.date %}
+                <span class="badge pinky text-dark">
+                    {{ event.date|date('d/m/Y H:i') }}
+                </span>
+            {% endif %}
+        </td>
+
+        <td>{{ event.location }}</td>
+
+        <td>
+            <span class="badge pinky">
+                {{ event.seats }}
+            </span>
+        </td>
+
+        <td>
+            {% if event.image %}
+                <img src="{{ event.image }}"
+                     alt="{{ event.title }}"
+                     class="rounded shadow-sm"
+                     style="width: 70px; height: 70px; object-fit: cover;">
+            {% else %}
+                <span class="text-muted">—</span>
+            {% endif %}
+        </td>
+
+        <td>
+            <div class="d-flex justify-content-center gap-2">
+                <a href="{{ path('admin_event_edit', {'id': event.id}) }}"
+                   class="btn btn-sm"
+                   onclick="event.stopPropagation();">
+                    Modifier
+                </a>
+
+                <form method="post"
+                      action="{{ path('admin_event_delete', {'id': event.id}) }}"
+                      onsubmit="event.stopPropagation(); return confirm('Supprimer cet événement ?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+                    <button class="btn btn-sm">
+                        🗑️
+                    </button>
+                </form>
+            </div>
+        </td>
+    </tr>
+{% endfor %}
+    </tbody>
+</table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

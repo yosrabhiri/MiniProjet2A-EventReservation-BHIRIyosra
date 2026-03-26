@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réservations - {{ event.title }}{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="title mb-1">Réservations de l'événement</h2>
+                <p class="text-muted mb-0">{{ event.title }}</p>
+            </div>
+
+            <a href="{{ path('admin_event_index') }}" class="btn btn-dark btnmain">
+                Retour
+            </a>
+        </div>
+
+        {% if reservations is empty %}
+            <div class="alert alert-info">
+                Aucune réservation pour cet événement.
+            </div>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle shadow-sm rounded overflow-hidden">
+                    <thead class="pinky text-center">
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Téléphone</th>
+                            <th>Date de réservation</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        {% for reservation in reservations %}
+                            <tr>
+                                <td class="fw-bold">{{ reservation.id }}</td>
+                                <td>{{ reservation.name }}</td>
+                                <td>{{ reservation.email }}</td>
+                                <td>{{ reservation.phone }}</td>
+                                <td>
+                                    {% if reservation.createdAt %}
+                                        {{ reservation.createdAt|date('d/m/Y H:i') }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -16,6 +16,7 @@
 
             .layout-wrapper {
                 min-height: 100vh;
+                padding:0;
             }
 
             .sidebar {
@@ -149,7 +150,7 @@
                 position: absolute;
                 top: 18px;
                 left: 18px;
-                background: #7a003c;
+                background: #fac2e0e0;
                 color: white;
                 border-radius: 14px;
                 padding: 8px 14px;
@@ -167,9 +168,9 @@
 
             .event-title {
                 font-size: 1.6rem;
-                font-weight: 500;
+                font-weight: 600;
                 margin-bottom: 0.7rem;
-                color: #1f2940;
+                color: #9f6381;
             }
 
             .event-location {
@@ -189,7 +190,14 @@
                 font-size: 0.98rem;
                 min-height: 52px;
             }
-
+            .alertRose {
+                background: #7a003c !important;
+                color: white !important;
+            }
+            .alertRoseclaire {
+                background: #fac2e0e0 !important;
+                color: #7a003c !important;
+            }
             .event-footer {
                 border-top: 1px solid #ece7ee;
                 margin-top: 1rem;
@@ -227,6 +235,16 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+    {% for message in app.flashes('success') %}
+    <div class="alert alertRoseclaire text-center m-3" id="flash-message">
+        {{ message }}
+    </div>
+{% endfor %}
+{% for message in app.flashes('danger') %}
+    <div class="alert alertRose m-3 text-center m-3" id="flash-message"">
+        {{ message }}
+    </div>
+{% endfor %}
         <div class="container-fluid layout-wrapper">
             <div class="row g-0">
                 <aside class="col-lg-3 col-xl-2 sidebar">
@@ -251,6 +269,21 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Auto-hide flash messages after 5 seconds
+            document.addEventListener('DOMContentLoaded', function() {
+                const flashMessage = document.getElementById('flash-message');
+                if (flashMessage) {
+                    setTimeout(function() {
+                        flashMessage.style.transition = 'opacity 0.5s ease-out';
+                        flashMessage.style.opacity = '0';
+                        setTimeout(function() {
+                            flashMessage.remove();
+                        }, 500);
+                    }, 5000); // 5 seconds
+                }
+            });
+        </script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

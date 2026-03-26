@@ -1,0 +1,165 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réserver {{ event.title }}{% endblock %}
+
+{% block stylesheets %}
+<style>
+    :root {
+        --main-color: #650031;
+        --soft-pink: #fbe7ee;
+    }
+
+
+
+    .main-bg {
+        background-color:#f3f1f4;
+
+
+    }
+    .title {
+        color: var(--main-color);
+    }
+
+    .btn-main {
+        background-color: var(--main-color);
+        border: none;
+        color: white;
+        transition: 0.3s;
+        bordzer-radius: 0px;
+        font-weight: 600;
+    }
+
+    .btn-main:hover {
+        background-color: #d6a3bc;
+        color:var(--main-color);
+    }
+.rose{
+    background-color: var(--soft-pink);
+        color: var(--main-color);
+        font-weight: bold;
+}
+    .badge-location {
+        background-color: var(--soft-pink);
+        color: var(--main-color);
+        font-weight: bold;
+    }
+
+    .card-custom {
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    .form-control:focus {
+        border-color: var(--main-color);
+        box-shadow: 0 0 0 0.2rem rgba(101, 0, 49, 0.2);
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-11">
+
+            <div class="card shadow-lg border-0 card-custom">
+
+                <div class="row g-0">
+
+
+                    <div class="col-lg-6">
+
+                        {% if event.image %}
+                            <img src="{{ event.image }}" alt="{{ event.title }}"
+                                 class="img-fluid w-100"
+                                 style="height: 420px; object-fit: cover;">
+                        {% endif %}
+
+                        <div class="p-4">
+
+                            <h1 class="fw-bold mb-3" style="color:#650031;">
+                                {{ event.title }}
+                            </h1>
+
+
+                            <span class="badge badge-location mb-3">
+                                📍 Sousse, Tunisia
+                            </span>
+
+                            <div class="row g-3 mb-3">
+
+                                <div class="col-md-6">
+                                    <div class="p-3 bg-light rounded-3 ">
+                                        <small class="text-muted" >📅 Date</small><br>
+                                        <strong>
+                                            {{ event.date|date("d/m/Y") }}
+                                        </strong><br>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="p-3  rounded-3 bg-light">
+                                        <small class="text-muted">👥 Places</small><br>
+                                        <strong>{{ event.seats }}</strong>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div>
+                                <h6 class="text-muted"></h6>
+                                <p>{{ event.description }}</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-lg-6 main-bg">
+
+                        <div class="p-5">
+
+                            <div class="text-center mb-4">
+                                <h3 class="fw-bold title">Réservation</h3>
+                                <p>Réservez votre place maintenant</p>
+                            </div>
+
+                            {{ form_start(form) }}
+
+                            <div class="mb-3">
+                                {{ form_label(form.name, ' Nom', {'label_attr': {'class': 'fw-bold'}}) }}
+                                {{ form_widget(form.name, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                            </div>
+
+                            <div class="mb-3">
+                                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'fw-bold'}}) }}
+                                {{ form_widget(form.email, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                            </div>
+
+                            <div class="mb-4">
+                                {{ form_label(form.phone, ' Téléphone', {'label_attr': {'class': 'fw-bold'}}) }}
+                                {{ form_widget(form.phone, {'attr': {'class': 'form-control form-control-lg'}}) }}
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn btn-main btn-lg ">
+                                     Confirmer
+                                </button>
+                            </div>
+
+                            {{ form_end(form) }}
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}
