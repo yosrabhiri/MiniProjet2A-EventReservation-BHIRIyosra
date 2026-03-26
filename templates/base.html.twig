@@ -2,16 +2,255 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <title>{% block title %}Evarto{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+        <style>
+            body {
+                background-color: #f6f4f7;
+                font-family: Arial, sans-serif;
+                color: #1f2940;
+            }
+
+            .layout-wrapper {
+                min-height: 100vh;
+            }
+
+            .sidebar {
+                background: #ffffff;
+                min-height: 100vh;
+                border-right: 1px solid #ece7ee;
+                padding: 1.5rem 1rem;
+            }
+
+            .brand {
+                font-size: 2rem;
+                font-weight: 700;
+                color: #7a003c;
+                margin-bottom: 2rem;
+            }
+
+            .sidebar-menu a {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                text-decoration: none;
+                color: #394257;
+                padding: 14px 16px;
+                border-radius: 16px;
+                margin-bottom: 10px;
+                font-size: 1.05rem;
+            }
+
+            .sidebar-menu a.active,
+            .sidebar-menu a:hover {
+                background-color: #7a003c;
+                color: white;
+            }
+
+            .sidebar-section {
+                margin-top: 2.5rem;
+                padding-top: 2rem;
+                border-top: 1px solid #ece7ee;
+            }
+
+            .main-content {
+                padding: 2rem;
+            }
+
+            .search-panel {
+                background: #f2edf3;
+                border-radius: 30px;
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+
+            .search-bar {
+                background: #ffffff;
+                border-radius: 22px;
+                padding: 1rem;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+            }
+
+            .search-segment {
+                border-right: 1px solid #ece7ee;
+                padding: 0 1rem;
+            }
+
+            .search-segment:last-child {
+                border-right: none;
+            }
+
+            .search-label {
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                color: #6c7487;
+                margin-bottom: 0.25rem;
+            }
+
+            .search-value {
+                color: #9aa3b2;
+                font-size: 1rem;
+            }
+
+            .search-btn {
+                background-color: #7a003c;
+                color: white;
+                border: none;
+                border-radius: 20px;
+                padding: 1rem 2rem;
+                font-weight: 600;
+                width: 100%;
+            }
+
+            .search-btn:hover {
+                background-color: #650031;
+                color: white;
+            }
+
+            .chip {
+                display: inline-block;
+                padding: 8px 18px;
+                border: 1px solid #d9dce4;
+                border-radius: 999px;
+                background: white;
+                color: #394257;
+                text-decoration: none;
+                margin-right: 10px;
+                margin-top: 10px;
+                font-size: 0.95rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+                font-weight: 600;
+                margin-bottom: 1.5rem;
+            }
+
+            .event-card {
+                background: white;
+                border: none;
+                border-radius: 24px;
+                overflow: hidden;
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+                height: 100%;
+            }
+
+            .event-image {
+                width: 100%;
+                height: 260px;
+                object-fit: cover;
+                display: block;
+            }
+
+            .badge-top {
+                position: absolute;
+                top: 18px;
+                left: 18px;
+                background: #7a003c;
+                color: white;
+                border-radius: 14px;
+                padding: 8px 14px;
+                font-size: 0.9rem;
+                font-weight: 600;
+            }
+
+            .card-image-wrapper {
+                position: relative;
+            }
+
+            .event-card-body {
+                padding: 1.4rem 1.4rem 1.2rem 1.4rem;
+            }
+
+            .event-title {
+                font-size: 1.6rem;
+                font-weight: 500;
+                margin-bottom: 0.7rem;
+                color: #1f2940;
+            }
+
+            .event-location {
+                color: #6b7486;
+                margin-bottom: 0.8rem;
+                font-size: 1rem;
+            }
+
+            .event-meta {
+                color: #6b7486;
+                font-size: 0.98rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .event-desc {
+                color: #6b7486;
+                font-size: 0.98rem;
+                min-height: 52px;
+            }
+
+            .event-footer {
+                border-top: 1px solid #ece7ee;
+                margin-top: 1rem;
+                padding-top: 1rem;
+            }
+
+            .price-label {
+                color: #6b7486;
+                font-size: 0.95rem;
+            }
+
+            .price-value {
+                color: #7a003c;
+                font-size: 1.5rem;
+                font-weight: 700;
+            }
+
+            @media (max-width: 991px) {
+                .sidebar {
+                    min-height: auto;
+                }
+
+                .search-segment {
+                    border-right: none;
+                    border-bottom: 1px solid #ece7ee;
+                    padding: 0.75rem 0;
+                }
+
+                .search-segment:last-child {
+                    border-bottom: none;
+                }
+            }
+        </style>
+
+        {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        <div class="container-fluid layout-wrapper">
+            <div class="row g-0">
+                <aside class="col-lg-3 col-xl-2 sidebar">
+                    <div class="brand">EventBooking</div>
+
+                    <nav class="sidebar-menu">
+                        <a href="{{ path('app_event') }}" class="active">⭐ Start ny booking</a>
+                        <a href="{{ path('app_event') }}">☆ Begivenheder</a>
+                        <a href="#">☆ Loyalitetsprogram</a>
+                    </nav>
+
+                    <div class="sidebar-section sidebar-menu">
+                        <a href="#">📅 Din kalender</a>
+                        <a href="#">📊 Booking statistik</a>
+                    </div>
+                </aside>
+
+                <main class="col-lg-9 col-xl-10 main-content">
+                    {% block body %}{% endblock %}
+                </main>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        {% block javascripts %}{% endblock %}
     </body>
 </html>
