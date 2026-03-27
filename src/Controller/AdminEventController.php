@@ -12,7 +12,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 //use Symfony\Component\Routing\Annotation\Route;
 
-
+#[Route('/admin/event')]
 final class AdminEventController extends AbstractController
 {
 
