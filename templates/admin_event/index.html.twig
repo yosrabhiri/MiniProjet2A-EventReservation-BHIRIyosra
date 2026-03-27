@@ -13,21 +13,24 @@
         margin: 12px ;
     }
     .btnmain {
-        background-color: var(--main-color);
         border: none;
-        color: white;
         transition: 0.3s;
         border-radius: 12px;
+        background-color: #f6d9e6;
+        color:var(--main-color);
     }
     .btnmain:hover {
-        background-color: #d6a3bc;
-        color:var(--main-color);
+        background-color: var(--main-color);
+        color: white;
         font-weight: bold;
     }
     .pinky {
-        background-color: var(--soft-pink)!important;
-        color: var(--main-color);
+
+        color: #650031!important;
         font-weight: bold;
+        background-color: #f6d9e6!important;
+
+
     }
 </style>
 {% endblock %}
@@ -47,13 +50,13 @@
                 <table class="table table-hover align-middle shadow-sm rounded overflow-hidden">
     <thead class="pinky text-center">
         <tr>
-            <th>#</th>
-            <th>Titre</th>
-            <th>Date</th>
-            <th>Lieu</th>
-            <th>Places</th>
-            <th>Image</th>
-            <th>Actions</th>
+            <th class="pinky">#</th>
+            <th class="pinky">Titre</th>
+            <th class="pinky">Date</th>
+            <th class="pinky">Lieu</th>
+            <th class="pinky">Places</th>
+            <th class="pinky">Image</th>
+            <th class="pinky">Actions</th>
         </tr>
     </thead>
     <tbody class="text-center">
@@ -95,9 +98,10 @@
         </td>
 
         <td>
-            <div class="d-flex justify-content-center gap-2">
+            <div class="d-flex justify-content-center gap-2 ">
                 <a href="{{ path('admin_event_edit', {'id': event.id}) }}"
-                   class="btn btn-sm"
+                   class="btn btn-sm "
+
                    onclick="event.stopPropagation();">
                     Modifier
                 </a>

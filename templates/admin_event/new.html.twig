@@ -1,10 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Créer un événement{% endblock %}
+{% block stylesheets %}
+<style>
+    :root {
+        --main-color: #650031;
+        --soft-pink: #fbe7ee;
+    }
+    .title {
+        color: var(--main-color);
+        font-weight: bold;
+        margin: 12px ;
+    }
+    .btnmain {
+        border: none;
+        transition: 0.3s;
+        background-color: var(--main-color);
+        color: white;
+         font-weight: bold;
+         margin-right: 8px;
+
+
+    }
+    .btnmain:hover {
+
+          background-color: #f6d9e6;
+        color:var(--main-color);
+
+    }
+    .secondarybtn {
+        color:var(--main-color);
+        font-weight: bold;
+    }
+    .pinky {
+
+        color: #650031!important;
+        font-weight: bold;
+        background-color: #f6d9e6!important;
+    }
+</style>
+{% endblock %}
 
 {% block body %}
     <div class="container py-4">
-        <h1 class="mb-4">Créer un événement</h1>
+        <h1 class="mb-4 title">Créer un événement</h1>
 
         {{ form_start(form) }}
             <div class="mb-3">
@@ -42,9 +81,10 @@
                 {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
                 {{ form_errors(form.image) }}
             </div>
-
-            <button class="btn btn-dark rounded-pill">Enregistrer</button>
-            <a href="{{ path('admin_event_index') }}" class="btn btn-outline-secondary rounded-pill">Retour</a>
+<div class="d-flex justify-content-end">
+            <button class="btn btnmain">Enregistrer</button>
+            <a href="{{ path('admin_event_index') }}" class="btn secondarybtn">Retour</a>
+            </div>
         {{ form_end(form) }}
     </div>
 {% endblock %}

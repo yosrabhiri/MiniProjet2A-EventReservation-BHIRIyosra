@@ -1,16 +1,55 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Réservations - {{ event.title }}{% endblock %}
+{% block stylesheets %}
+<style>
+    :root {
+        --main-color: #650031;
+
+    }
+    .title {
+        color: var(--main-color);
+        font-weight: bold;
+        margin: 12px ;
+        font-size: 1.6rem;
+    }
+    .btnmain {
+        background-color: var(--main-color);
+        border: none;
+        color: white;
+        transition: 0.3s;
+        border-radius: 12px;
+    }
+    .btnmain:hover {
+        background-color: #f6d9e6;
+        color:var(--main-color);
+        font-weight: bold;
+    }
+    .pinky {
+
+        color: #650031!important;
+        font-weight: bold;
+        background-color: #f6d9e6!important;
+
+
+    }
+    .secondarybtn:hover {
+        background-color: #f6d9e6;
+        color:var(--main-color);
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
 
 {% block body %}
     <div class="container py-4">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <div>
-                <h2 class="title mb-1">Réservations de l'événement</h2>
-                <p class="text-muted mb-0">{{ event.title }}</p>
-            </div>
+                <h2 class="title">Réservations de l'événement: {{ event.title }}</h2>
 
-            <a href="{{ path('admin_event_index') }}" class="btn btn-dark btnmain">
+                            </div>
+
+            <a href="{{ path('admin_event_index') }}" class="btn  secondarybtn ">
                 Retour
             </a>
         </div>
@@ -24,11 +63,11 @@
                 <table class="table table-hover align-middle shadow-sm rounded overflow-hidden">
                     <thead class="pinky text-center">
                         <tr>
-                            <th>#</th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                            <th>Téléphone</th>
-                            <th>Date de réservation</th>
+                            <th class="pinky">#</th>
+                            <th class="pinky">Nom</th>
+                            <th class="pinky">Email</th>
+                            <th class="pinky">Téléphone</th>
+                            <th class="pinky">Date de réservation</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
