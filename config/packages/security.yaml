@@ -1,9 +1,7 @@
 security:
-    # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
 
-    # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
         user_provider:
             entity:
@@ -17,15 +15,36 @@ security:
 
     firewalls:
         dev:
-            pattern: ^/(_profiler|_wdt|assets|build)/
+            pattern: ^/(_profiler|_wdt|css|images|js|assets|build)/
             security: false
+
+        api_login:
+            pattern: ^/api/login_check
+            stateless: true
+            provider: user_provider
+            json_login:
+                check_path: /api/login_check
+                username_path: username
+                password_path: password
+                success_handler: lexik_jwt_authentication.handler.authentication_success
+                failure_handler: lexik_jwt_authentication.handler.authentication_failure
+
+        api_refresh_token:
+            pattern: ^/api/token/refresh
+            stateless: true
+            security: false
+
+        api:
+            pattern: ^/api
+            stateless: true
+            provider: user_provider
+            jwt: ~
 
         admin:
             pattern: ^/admin
             lazy: true
             provider: admin_provider
             custom_authenticator: App\Security\AdminAuthenticator
-
             logout:
                 path: admin_logout
                 target: admin_login
@@ -34,27 +53,17 @@ security:
             lazy: true
             provider: user_provider
             custom_authenticator: App\Security\UserAuthenticator
-
             logout:
                 path: app_logout
                 target: app_login
 
     access_control:
+        - { path: ^/api/login_check, roles: PUBLIC_ACCESS }
+        - { path: ^/api/token/refresh, roles: PUBLIC_ACCESS }
+        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+
         - { path: ^/admin/login, roles: PUBLIC_ACCESS }
         - { path: ^/admin, roles: ROLE_ADMIN }
+
         - { path: ^/login, roles: PUBLIC_ACCESS }
-
-when@test:
-    security:
-        password_hashers:
-            App\Entity\User:
-                algorithm: auto
-                cost: 4
-                time_cost: 3
-                memory_cost: 10
-
-            App\Entity\Admin:
-                algorithm: auto
-                cost: 4
-                time_cost: 3
-                memory_cost: 10
+        - { path: ^/register, roles: PUBLIC_ACCESS }
