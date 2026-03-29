@@ -52,7 +52,7 @@
         <button type="button" class="chip" onclick="quickFilter('Tunis')">Tunis</button>
         <button type="button" class="chip" onclick="quickFilter('Sfax')">Sfax</button>
         <button type="button" class="chip" onclick="quickFilter('Sousse')">Sousse</button>
-        <button type="button" class="chip" onclick="logout()">Logout</button>
+
     </div>
 </section>
 
@@ -80,10 +80,7 @@ document.addEventListener('DOMContentLoaded', function () {
     loadEvents();
 });
 
-function logout() {
-    clearTokens();
-    window.location.href = '/login';
-}
+
 
 function quickFilter(city) {
     document.getElementById('location').value = city;
