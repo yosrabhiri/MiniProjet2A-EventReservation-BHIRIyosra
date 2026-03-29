@@ -1,0 +1,89 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Modifier un événement{% endblock %}
+{% block stylesheets %}
+<style>
+    :root {
+        --main-color: #650031;
+        --soft-pink: #fbe7ee;
+    }
+    .title {
+        color: var(--main-color);
+        font-weight: bold;
+        margin: 12px ;
+    }
+    .btnmain {
+        border: none;
+        transition: 0.3s;
+        background-color: var(--main-color);
+        color: white;
+         font-weight: bold;
+         margin-right: 8px;
+
+
+    }
+    .btnmain:hover, .secondarybtn:hover{
+
+          background-color: #f6d9e6;
+        color:var(--main-color);
+
+    }
+    .secondarybtn {
+        color:var(--main-color);
+        font-weight: bold;
+    }
+    .pinky {
+
+        color: #650031!important;
+        font-weight: bold;
+        background-color: #f6d9e6!important;
+    }
+</style>
+{% endblock %}
+{% block body %}
+    <div class="container py-4">
+        <h1 class="mb-4 title">Modifier un événement</h1>
+
+        {{ form_start(form) }}
+            <div class="mb-3">
+                {{ form_label(form.title) }}
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.title) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.description) }}
+                {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.date) }}
+                {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.date) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.location) }}
+                {{ form_widget(form.location, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.location) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.seats) }}
+                {{ form_widget(form.seats, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.seats) }}
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.image) }}
+                {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+                {{ form_errors(form.image) }}
+            </div>
+<div class="d-flex justify-content-end">
+            <button class="btn btnmain">Mettre à jour</button>
+            <a href="{{ path('admin_event_index') }}" class="btn secondarybtn">Retour</a>
+       </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

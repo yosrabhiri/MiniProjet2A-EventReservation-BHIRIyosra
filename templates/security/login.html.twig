@@ -1,0 +1,331 @@
+{% extends 'base_auth.html.twig' %}
+
+{% block title %}Sign in{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f6fa;
+    }
+    .btnmain {
+        transition: 0.3s;
+         font-weight: bold;
+         margin-right: 8px;
+         background-color: #f6d9e6;
+        color:#650031;
+         width: 100%;
+        height: 50px;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        cursor: pointer;
+
+    }
+    .btnmain:hover{
+
+          background-color:#650031 ;
+        color: white;
+
+    }
+
+    /* ===== TOP BLUE SECTION ===== */
+    .top-section {
+        background: linear-gradient(180deg, #650031 0%, #b33472 100%);
+        height: 300px;
+        color: white;
+        padding: 40px;
+        position: relative;
+    }
+
+    .top-content {
+        max-width: 700px;
+        margin:35px 45px
+    }
+
+    .logo {
+        font-weight: bold;
+        font-size: 22px;
+        margin-bottom: 40px;
+    }
+
+    .top-content h1 {
+        font-size: 40px;
+        margin: 0;
+    }
+
+    .top-content p {
+        margin-top: 10px;
+        opacity: 0.9;
+        max-width: 400px;
+    }
+
+    /* ===== MAIN AREA ===== */
+    .main-section {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px;
+        margin-top: -120px; /* IMPORTANT pour overlap */
+    }
+
+    /* LEFT USERS */
+    .login-users {
+        width: 50%;
+    }
+
+    .login-users h4 {
+        margin-bottom: 20px;
+    }
+
+    .user-cards {
+        display: flex;
+        gap: 20px;
+    }
+
+    .user-card {
+        background: white;
+        border-radius: 15px;
+        padding: 15px;
+        text-align: center;
+        width: 140px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .user-card img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
+
+    .login-card {
+        width: 450px;
+        position: absolute;
+        z-index: 1;
+        top:5%;
+        Right: 8%;
+        background: white;
+        border-radius: 25px;
+        padding: 40px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+
+    }
+
+    .login-card h2 {
+        font-size: 40px;
+        margin-bottom: 30px;
+    }
+    .title {
+        color: #650031;
+        font-weight: 800;
+        font-size: 2rem;
+        text-align: center;
+        margin: 20px ;
+    }
+    .event-description {
+
+        font-size:1.1rem;
+        padding-top:15px;
+
+    }
+    .event-title {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 1.8rem;
+    }
+    .form-control {
+        width: 100%;
+        height: 50px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+
+
+
+
+    .remember {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 20px;
+    }
+    .login-image {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-image img {
+    max-width: 280px;
+    width: 100%;
+    border-radius: 10px;
+}
+  .register-link {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 15px;
+    }
+    .register-link a {
+        color: #650031;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .register-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* ERROR */
+    .alert {
+
+        color: #f6d9e6;
+        background-color: #650031;
+        padding: 10px;
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    @media(max-width: 900px) {
+        .main-section {
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .login-users {
+            width: 100%;
+        }
+
+        .login-card {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<div class="top-section">
+    <div class="top-content">
+        <h1 class="event-title">Sign In To</h1>
+        <h1 class="event-title">User Dashboard</h1>
+        <p class="event-description">
+            Enter your credentials to access the user panel and reserve your seats.
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        </p>
+    </div>
+</div>
+
+<div class="main-section">
+    <div class="login-card">
+        <h1 class="title">Sign in</h1>
+
+        <div class="login-image">
+            <img src="https://img.freepik.com/free-vector/colleagues-preparing-corporate-party-time-management-deadline-brand-event-event-brand-management-sponsored-event-organization-concept_335657-120.jpg" alt="img">
+        </div>
+
+        <div id="login-error" class="alert" style="display: none;"></div>
+
+        <form id="login-form">
+            <input
+                type="text"
+                id="username"
+                class="form-control"
+                placeholder="Username"
+                required
+            >
+
+            <input
+                type="password"
+                id="password"
+                class="form-control"
+                placeholder="Password"
+                required
+            >
+
+            <div class="remember">
+                <input type="checkbox" id="remember_me">
+                <label for="remember_me">Remember me</label>
+            </div>
+
+            <button type="submit" class="btn-login btnmain">Sign in</button>
+
+                    <div class="register-link">
+                <span>Don’t have an account?</span>
+                <a  href="{{ path('app_register') }}">Create one</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('login-form');
+    const errorBox = document.getElementById('login-error');
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        errorBox.style.display = 'none';
+        errorBox.textContent = '';
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        const rememberMe = document.getElementById('remember_me').checked;
+
+        try {
+            const response = await fetch('/api/login_check', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                errorBox.textContent = data.message || 'Invalid username or password.';
+                errorBox.style.display = 'block';
+                return;
+            }
+
+            if (!data.token) {
+                errorBox.textContent = 'Token not returned by server.';
+                errorBox.style.display = 'block';
+                return;
+            }
+
+            localStorage.removeItem('token');
+            localStorage.removeItem('refresh_token');
+            sessionStorage.removeItem('token');
+            sessionStorage.removeItem('refresh_token');
+
+            if (rememberMe) {
+                localStorage.setItem('token', data.token);
+
+                if (data.refresh_token) {
+                    localStorage.setItem('refresh_token', data.refresh_token);
+                }
+            } else {
+                sessionStorage.setItem('token', data.token);
+
+                if (data.refresh_token) {
+                    sessionStorage.setItem('refresh_token', data.refresh_token);
+                }
+            }
+
+            window.location.href = '/event';
+        } catch (error) {
+            errorBox.textContent = 'Server error. Please try again.';
+            errorBox.style.display = 'block';
+        }
+    });
+});
+</script>
+{% endblock %}

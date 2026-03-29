@@ -1,0 +1,286 @@
+{% extends 'base_auth.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: #f5f6fa;
+    }
+
+    .btnmain {
+        transition: 0.3s;
+        font-weight: bold;
+        background-color: #f6d9e6;
+        color: #650031;
+        width: 100%;
+        height: 50px;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        cursor: pointer;
+    }
+
+    .btnmain:hover {
+        background-color: #650031;
+        color: white;
+    }
+
+    /* ===== TOP SECTION ===== */
+    .top-section {
+        background: linear-gradient(180deg, #650031 0%, #b33472 100%);
+        min-height: 300px;
+        color: white;
+        padding: 40px;
+        position: relative;
+    }
+
+    .top-content {
+        max-width: 700px;
+        margin: 30px;
+    }
+
+    .event-title {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 1.8rem;
+        margin: 0;
+    }
+
+    .top-content h1 {
+        font-size: 40px;
+        margin: 0;
+    }
+
+    .event-description {
+        font-size: 1.1rem;
+        padding-top: 15px;
+        max-width: 450px;
+        line-height: 1.6;
+    }
+
+    /* ===== MAIN AREA ===== */
+    .main-section {
+        display: flex;
+        justify-content: flex-end;
+        padding: 40px;
+        margin-top: -120px;
+
+    }
+
+
+    .register-card {
+        width: 450px;
+        position: absolute;
+        z-index: 1;
+        top:5%;
+        Right: 8%;
+        background: white;
+        border-radius: 25px;
+        padding: 40px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    }
+
+    .title {
+        color: #650031;
+        font-weight: 800;
+        font-size: 2rem;
+        text-align: center;
+        margin: 20px 0;
+    }
+
+    .register-image {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .register-image img {
+        max-width: 280px;
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .form-control {
+        width: 100%;
+        height: 50px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        padding: 10px 14px;
+        margin-bottom: 5px;
+        box-sizing: border-box;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #650031;
+    }
+
+    .mb-3 {
+        margin-bottom: 20px;
+    }
+
+    .form-error {
+        color: #b00020;
+        font-size: 14px;
+        margin-top: 5px;
+    }
+
+    .login-link {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 15px;
+    }
+
+    .login-link a {
+        color: #650031;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+
+
+    @media (max-width: 992px) {
+        .main-section {
+            justify-content: center;
+            margin-top: -80px;
+        }
+
+        .register-card {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .top-content h1 {
+            font-size: 34px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .top-section {
+            padding: 30px 20px 100px 20px;
+        }
+
+        .top-content {
+            margin: 0;
+        }
+
+        .top-content h1 {
+            font-size: 28px;
+        }
+
+        .event-title {
+            font-size: 1.5rem;
+        }
+
+        .event-description {
+            font-size: 1rem;
+            max-width: 100%;
+        }
+
+        .main-section {
+            padding: 20px;
+            margin-top: -60px;
+        }
+
+        .register-card {
+            padding: 25px 20px;
+            border-radius: 20px;
+        }
+
+        .title {
+            font-size: 1.7rem;
+        }
+
+        .register-image img {
+            max-width: 220px;
+        }
+
+        .form-control,
+        .btnmain {
+            height: 48px;
+            font-size: 16px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .top-content h1 {
+            font-size: 24px;
+        }
+
+        .event-title {
+            font-size: 1.3rem;
+        }
+
+        .event-description {
+            font-size: 0.95rem;
+        }
+
+        .register-card {
+            padding: 20px 15px;
+        }
+
+        .title {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<!-- ===== TOP SECTION ===== -->
+<div class="top-section">
+    <div class="top-content">
+        <h1 class="event-title">Créer un compte</h1>
+        <h1 class="event-title">User Dashboard</h1>
+        <p class="event-description">
+            Inscrivez-vous pour accéder à votre espace utilisateur et gérer vos réservations facilement.
+        </p>
+    </div>
+</div>
+
+<!-- ===== MAIN SECTION ===== -->
+<div class="main-section">
+    <div class="register-card">
+        <h1 class="title">Inscription</h1>
+
+        <div class="register-image">
+            <img src="https://img.freepik.com/premium-vector/online-registration-sign-up-concept-smartphone-with-login-password-form-page-screen_735449-674.jpg"alt="register image">
+        </div>
+
+        {{ form_start(form) }}
+
+            <div class="mb-3">
+                {{ form_label(form.username) }}
+                {{ form_widget(form.username, {'attr': {'class': 'form-control', 'placeholder': 'Nom d’utilisateur'}}) }}
+                <div class="form-error">
+                    {{ form_errors(form.username) }}
+                </div>
+            </div>
+
+            <div class="mb-3">
+                {{ form_label(form.password) }}
+                {{ form_widget(form.password, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
+                <div class="form-error">
+                    {{ form_errors(form.password) }}
+                </div>
+            </div>
+
+            <button class="btnmain">
+                S'inscrire
+            </button>
+
+        {{ form_end(form) }}
+
+        <div class="login-link">
+            <span>Vous avez déjà un compte ?</span>
+            <a href="{{ path('app_login') }}">Se connecter</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends 'base_admin.html.twig' %}
+
+{% block title %}Réservations - {{ event.title }}{% endblock %}
+{% block stylesheets %}
+<style>
+    :root {
+        --main-color: #650031;
+
+    }
+    .title {
+        color: var(--main-color);
+        font-weight: bold;
+        margin: 12px ;
+        font-size: 1.6rem;
+    }
+    .btnmain {
+        background-color: var(--main-color);
+        border: none;
+        color: white;
+        transition: 0.3s;
+        border-radius: 12px;
+    }
+    .btnmain:hover {
+        background-color: #f6d9e6;
+        color:var(--main-color);
+        font-weight: bold;
+    }
+    .pinky {
+
+        color: #650031!important;
+        font-weight: bold;
+        background-color: #f6d9e6!important;
+
+
+    }
+    .secondarybtn:hover {
+        background-color: #f6d9e6;
+        color:var(--main-color);
+        font-weight: bold;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h2 class="title">Réservations de l'événement: {{ event.title }}</h2>
+
+                            </div>
+
+            <a href="{{ path('admin_event_index') }}" class="btn  secondarybtn ">
+                Retour
+            </a>
+        </div>
+
+        {% if reservations is empty %}
+            <div class="alert pinky">
+                Aucune réservation pour cet événement.
+            </div>
+        {% else %}
+            <div class="table-responsive">
+                <table class="table table-hover align-middle shadow-sm rounded overflow-hidden">
+                    <thead class="pinky text-center">
+                        <tr>
+                            <th class="pinky">#</th>
+                            <th class="pinky">Nom</th>
+                            <th class="pinky">Email</th>
+                            <th class="pinky">Téléphone</th>
+                            <th class="pinky">Date de réservation</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-center">
+                        {% for reservation in reservations %}
+                            <tr>
+                                <td class="fw-bold">{{ reservation.id }}</td>
+                                <td>{{ reservation.name }}</td>
+                                <td>{{ reservation.email }}</td>
+                                <td>{{ reservation.phone }}</td>
+                                <td>
+                                    {% if reservation.createdAt %}
+                                        {{ reservation.createdAt|date('d/m/Y H:i') }}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

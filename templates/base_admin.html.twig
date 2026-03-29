@@ -260,13 +260,14 @@
                 <div class="brand">YBooking</div>
 
                 <nav class="sidebar-menu">
-                    <a href="{{ path('app_event') }}" class="active">☆ Start booking</a>
-                    <a href="{{ path('admin_login') }}">☆ Login as Admin</a>
-                    <a href="{{ path('app_event') }}">☆ Filter Events</a>
+                    <a href="{{ path('admin_event_index') }}" class="active">☆ Dashboard</a>
+                    <a href="{{ path('app_login') }}" class="btn ">Login User</a>
 
-                    <button type="button" class="btn btn-outline-dark mt-3 w-100" onclick="logout()">
-                        ☆ Logout
-                    </button>
+
+
+                    <a href="{{ path('admin_logout') }}" class="btn ">
+                        Logout Admin
+                    </a>
                 </nav>
             </aside>
 
@@ -276,32 +277,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const flashMessages = document.querySelectorAll('.flash-message');
 
-            flashMessages.forEach(function(flashMessage) {
-                setTimeout(function() {
-                    flashMessage.style.transition = 'opacity 0.5s ease-out';
-                    flashMessage.style.opacity = '0';
-                    setTimeout(function() {
-                        flashMessage.remove();
-                    }, 500);
-                }, 5000);
-            });
-        });
-
-        function logout() {
-            localStorage.removeItem('token');
-            localStorage.removeItem('refresh_token');
-            sessionStorage.removeItem('token');
-            sessionStorage.removeItem('refresh_token');
-
-            window.location.href = '/login';
-        }
-    </script>
 
     {% block javascripts %}{% endblock %}
 </body>
