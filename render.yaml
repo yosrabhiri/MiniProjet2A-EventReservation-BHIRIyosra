@@ -19,6 +19,8 @@ services:
         sync: false
       - key: MAILER_DSN
         value: "null://null"
+      - key: DEFAULT_URI
+        value: "https://miniprojet-event-reservation.onrender.com"
       - key: JWT_PASSPHRASE
         generateValue: true
       - key: RUN_MIGRATIONS
