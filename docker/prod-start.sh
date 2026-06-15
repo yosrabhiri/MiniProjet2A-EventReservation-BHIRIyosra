@@ -5,6 +5,7 @@ touch .env
 mkdir -p var/cache var/log
 export APP_ENV="${APP_ENV:-prod}"
 export APP_DEBUG="${APP_DEBUG:-0}"
+export DEFAULT_URI="${DEFAULT_URI:-https://miniprojet-event-reservation.onrender.com}"
 
 PORT="${PORT:-80}"
 sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf
