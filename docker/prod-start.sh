@@ -1,7 +1,10 @@
 #!/bin/sh
 set -e
 
+touch .env
 mkdir -p var/cache var/log
+export APP_ENV="${APP_ENV:-prod}"
+export APP_DEBUG="${APP_DEBUG:-0}"
 
 PORT="${PORT:-80}"
 sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf
