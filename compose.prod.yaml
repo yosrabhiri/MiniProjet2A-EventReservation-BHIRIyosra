@@ -1,0 +1,33 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    ports:
+      - "8080:80"
+    environment:
+      APP_ENV: prod
+      APP_DEBUG: "0"
+      APP_SECRET: change-me
+      DATABASE_URL: mysql://app:password@database:3306/eventDB?serverVersion=8.0.32&charset=utf8mb4
+      MAILER_DSN: "null://null"
+      JWT_PASSPHRASE: change-me
+      JWT_SECRET_KEY: /var/www/html/config/jwt/private.pem
+      JWT_PUBLIC_KEY: /var/www/html/config/jwt/public.pem
+      RUN_MIGRATIONS: "1"
+    depends_on:
+      - database
+
+  database:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: eventDB
+      MYSQL_USER: app
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - database_data:/var/lib/mysql
+
+volumes:
+  database_data:
