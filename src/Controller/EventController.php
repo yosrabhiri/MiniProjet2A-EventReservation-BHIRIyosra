@@ -11,6 +11,12 @@ use Symfony\Component\Routing\Attribute\Route;
 
 final class EventController extends AbstractController
 {
+    #[Route('/', name: 'app_home', methods: ['GET'])]
+    public function home(): Response
+    {
+        return $this->redirectToRoute('app_event');
+    }
+
     #[Route('/event', name: 'app_event', methods: ['GET'])]
     public function index(Request $request, EventRepository $eventRepository): Response
     {
