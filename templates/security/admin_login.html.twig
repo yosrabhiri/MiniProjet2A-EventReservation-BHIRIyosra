@@ -217,7 +217,7 @@
         <img src="https://img.freepik.com/free-vector/colleagues-preparing-corporate-party-time-management-deadline-brand-event-event-brand-management-sponsored-event-organization-concept_335657-120.jpg" alt="img">
     </div>
 
-        <form method="post">
+        <form method="post" action="{{ path('admin_login') }}">
             {% if error %}
                 <div class="alert">
                     {{ error.messageKey|trans(error.messageData, 'security') }}
@@ -229,12 +229,14 @@
                    value="{{ last_username }}"
                    class="form-control"
                    placeholder="Username or email"
+                   autocomplete="username"
                    required>
 
             <input type="password"
                    name="password"
                    class="form-control"
                    placeholder="Password"
+                   autocomplete="current-password"
                    required>
 
             <input type="hidden"
@@ -247,7 +249,7 @@
                 <label>Remember me</label>
             </div>
 
-            <button class="btn-login btnmain">Sign in</button>
+            <button type="submit" class="btn-login btnmain">Sign in</button>
         </form>
     </div>
 </div>
