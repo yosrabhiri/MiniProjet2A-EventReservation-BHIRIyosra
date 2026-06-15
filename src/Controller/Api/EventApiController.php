@@ -49,14 +49,6 @@ public function reserve(
     EntityManagerInterface $entityManager,
     MailerInterface $mailer
 ): JsonResponse {
-    $user = $this->getUser();
-
-    if (!$user) {
-        return $this->json([
-            'message' => 'Non authentifié'
-        ], 401);
-    }
-
     if ($event->getSeats() <= 0) {
         return $this->json([
             'message' => 'Cet événement est complet'

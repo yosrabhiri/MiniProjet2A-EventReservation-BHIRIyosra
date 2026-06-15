@@ -67,10 +67,6 @@
 <div id="events-container" class="row g-4"></div>
 <script src="/js/auth.js"></script>
 <script>
-if (!getAccessToken()) {
-    window.location.href = '/login';
-}
-
 document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('search-form').addEventListener('submit', function (e) {
         e.preventDefault();
@@ -119,12 +115,6 @@ async function loadEvents() {
         const response = await apiFetch('/api/events?' + params.toString(), {
             method: 'GET'
         });
-
-        if (response.status === 401) {
-            clearTokens();
-            window.location.href = '/login';
-            return;
-        }
 
         const events = await response.json();
 
