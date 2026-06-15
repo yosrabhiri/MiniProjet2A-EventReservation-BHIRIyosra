@@ -15,6 +15,12 @@ if [ -n "$JWT_PRIVATE_KEY" ] && [ -n "$JWT_PUBLIC_KEY" ]; then
     export JWT_PUBLIC_KEY=/tmp/jwt/public.pem
 fi
 
+if [ -n "$JWT_SECRET_KEY" ] && [ -n "$JWT_PUBLIC_KEY" ] && [ ! -f "$JWT_SECRET_KEY" ]; then
+    mkdir -p "$(dirname "$JWT_SECRET_KEY")" "$(dirname "$JWT_PUBLIC_KEY")"
+    openssl genrsa -aes256 -passout pass:"$JWT_PASSPHRASE" -out "$JWT_SECRET_KEY" 4096
+    openssl rsa -pubout -in "$JWT_SECRET_KEY" -passin pass:"$JWT_PASSPHRASE" -out "$JWT_PUBLIC_KEY"
+fi
+
 php bin/console cache:clear --env=prod --no-debug --no-warmup
 php bin/console cache:warmup --env=prod --no-debug
 php bin/console asset-map:compile --env=prod --no-debug || true

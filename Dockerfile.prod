@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     default-mysql-client \
+    openssl \
     && docker-php-ext-install pdo pdo_mysql zip intl opcache \
     && rm -rf /var/lib/apt/lists/*
 
