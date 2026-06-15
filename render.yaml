@@ -7,7 +7,7 @@ services:
     dockerfilePath: ./Dockerfile.prod
     dockerContext: .
     autoDeployTrigger: commit
-    healthCheckPath: /
+    healthCheckPath: /health
     envVars:
       - key: APP_ENV
         value: prod

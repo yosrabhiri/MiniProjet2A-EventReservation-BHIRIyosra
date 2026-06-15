@@ -17,6 +17,12 @@ final class EventController extends AbstractController
         return $this->redirectToRoute('app_event');
     }
 
+    #[Route('/health', name: 'app_health', methods: ['GET', 'HEAD'])]
+    public function health(): Response
+    {
+        return new Response('OK', Response::HTTP_OK);
+    }
+
     #[Route('/event', name: 'app_event', methods: ['GET'])]
     public function index(Request $request, EventRepository $eventRepository): Response
     {
