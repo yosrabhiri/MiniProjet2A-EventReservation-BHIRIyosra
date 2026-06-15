@@ -5,7 +5,9 @@ touch .env
 mkdir -p var/cache var/log
 export APP_ENV="${APP_ENV:-prod}"
 export APP_DEBUG="${APP_DEBUG:-0}"
+export APP_SECRET="${APP_SECRET:-render-production-secret-change-me}"
 export DEFAULT_URI="${DEFAULT_URI:-https://miniprojet-event-reservation.onrender.com}"
+export MESSENGER_TRANSPORT_DSN="${MESSENGER_TRANSPORT_DSN:-sync://}"
 
 PORT="${PORT:-80}"
 sed -i "s/Listen 80/Listen ${PORT}/" /etc/apache2/ports.conf

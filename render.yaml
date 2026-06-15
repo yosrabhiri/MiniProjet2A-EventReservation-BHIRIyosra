@@ -14,11 +14,13 @@ services:
       - key: APP_DEBUG
         value: "0"
       - key: APP_SECRET
-        generateValue: true
+        value: "render-production-secret-change-me"
       - key: DATABASE_URL
         sync: false
       - key: MAILER_DSN
         value: "null://null"
+      - key: MESSENGER_TRANSPORT_DSN
+        value: "sync://"
       - key: DEFAULT_URI
         value: "https://miniprojet-event-reservation.onrender.com"
       - key: JWT_PASSPHRASE
