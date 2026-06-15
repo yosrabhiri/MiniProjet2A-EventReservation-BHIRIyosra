@@ -231,16 +231,20 @@
             <input
                 type="text"
                 id="username"
+                name="username"
                 class="form-control"
                 placeholder="Username"
+                autocomplete="username"
                 required
             >
 
             <input
                 type="password"
                 id="password"
+                name="password"
                 class="form-control"
                 placeholder="Password"
+                autocomplete="current-password"
                 required
             >
 
@@ -249,7 +253,7 @@
                 <label for="remember_me">Remember me</label>
             </div>
 
-            <button type="submit" class="btn-login btnmain">Sign in</button>
+            <button type="submit" id="login-submit" class="btn-login btnmain">Sign in</button>
 
                     <div class="register-link">
                 <span>Don’t have an account?</span>
@@ -260,9 +264,15 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+function initUserLoginForm() {
     const form = document.getElementById('login-form');
     const errorBox = document.getElementById('login-error');
+
+    if (!form || form.dataset.loginBound === '1') {
+        return;
+    }
+
+    form.dataset.loginBound = '1';
 
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -326,6 +336,12 @@ document.addEventListener('DOMContentLoaded', function () {
             errorBox.style.display = 'block';
         }
     });
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initUserLoginForm);
+} else {
+    initUserLoginForm();
+}
 </script>
 {% endblock %}
