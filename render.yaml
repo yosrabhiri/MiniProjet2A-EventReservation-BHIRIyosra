@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: miniprojet-event-reservation
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile.prod
+    dockerContext: .
+    autoDeployTrigger: commit
+    healthCheckPath: /
+    envVars:
+      - key: APP_ENV
+        value: prod
+      - key: APP_DEBUG
+        value: "0"
+      - key: APP_SECRET
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: MAILER_DSN
+        value: "null://null"
+      - key: JWT_PASSPHRASE
+        generateValue: true
+      - key: RUN_MIGRATIONS
+        value: "1"
